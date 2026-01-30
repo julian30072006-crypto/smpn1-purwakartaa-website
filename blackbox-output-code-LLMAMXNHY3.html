@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMPN 1 Purwakarta - Informasi Sekolah</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+        header { background-color: #007bff; color: white; text-align: center; padding: 20px; }
+        nav { background-color: #333; color: white; padding: 10px; text-align: center; }
+        nav a { color: white; margin: 0 15px; text-decoration: none; }
+        section { padding: 20px; max-width: 800px; margin: auto; background: white; margin-top: 20px; border-radius: 8px; }
+        footer { text-align: center; padding: 10px; background-color: #333; color: white; }
+        img { max-width: 100%; height: auto; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>SMP Negeri 1 Purwakarta</h1>
+        <p>Sekolah Berkualitas untuk Generasi Emas</p>
+    </header>
+    
+    <nav>
+        <a href="#profil">Profil Sekolah</a>
+        <a href="#berita">Berita</a>
+        <a href="#galeri">Galeri</a>
+        <a href="#kontak">Kontak</a>
+    </nav>
+    
+    <section id="profil">
+        <h2>Profil Sekolah</h2>
+        <p>SMPN 1 Purwakarta adalah sekolah menengah pertama negeri yang terletak di [Alamat Lengkap, misalnya Jl. Raya Purwakarta No. 123, Purwakarta, Jawa Barat]. Didirikan pada [Tahun Berdiri, misalnya 1950], sekolah ini berkomitmen untuk memberikan pendidikan berkualitas dengan fokus pada pengembangan karakter siswa.</p>
+        <ul>
+            <li>Kepala Sekolah: [Nama Kepala Sekolah]</li>
+            <li>Jumlah Siswa: [Jumlah Siswa]</li>
+            <li>Fasilitas: [Daftar Fasilitas, misalnya Lapangan Olahraga, Laboratorium, Perpustakaan]</li>
+        </ul>
+        <img src="assets/logo.png" alt="Logo SMPN 1 Purwakarta" style="display: block; margin: auto;">
+    </section>
+    
+    <section id="berita">
+        <h2>Berita Terbaru</h2>
+        <article>
+            <h3>[Judul Berita 1, misalnya Kegiatan Hari Pendidikan Nasional]</h3>
+            <p>[Deskripsi singkat berita. Tambahkan tanggal dan detail.]</p>
+        </article>
+        <article>
+            <h3>[Judul Berita 2]</h3>
+            <p>[Deskripsi.]</p>
+        </article>
+        <!-- Tambahkan lebih banyak artikel di sini -->
+    </section>
+    
+    <section id="galeri">
+        <h2>Galeri</h2>
+        <p>Foto-foto kegiatan sekolah:</p>
+        <img src="assets/foto1.jpg" alt="Foto Kegiatan 1">
+        <img src="assets/foto2.jpg" alt="Foto Kegiatan 2">
+        <!-- Tambahkan gambar lebih banyak -->
+    </section>
+    
+    <section id="kontak">
+        <h2>Kontak Kami</h2>
+        <p>Alamat: [Alamat Lengkap]</p>
+        <p>Telepon: [Nomor Telepon]</p>
+        <p>Email: [Email Sekolah]</p>
+        <p>Website Resmi: [Jika ada, link ke situs lama]</p>
+    </section>
+    
+    <footer>
+        <p>&copy; 2023 SMPN 1 Purwakarta. Semua Hak Dilindungi.</p>
+    </footer>
+    
+    <script>
+        // Script sederhana untuk smooth scroll (opsional)
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
