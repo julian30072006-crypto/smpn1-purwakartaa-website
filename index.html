@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>M7 World Championship</title>
 
-    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
@@ -17,53 +16,66 @@
         }
 
         body {
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             color: #ffffff;
-            line-height: 1.8;
+            background-color: #0b0f1a;
         }
 
+        /* HERO SECTION */
         header {
-            padding: 80px 20px;
+            min-height: 100vh;
+            background: 
+                linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.85)),
+                url("https://images.unsplash.com/photo-1606112219348-204d7d8b94ee");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(6px);
+            padding: 20px;
         }
 
         header h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 600;
-            letter-spacing: 2px;
+            color: #ffd369;
+            letter-spacing: 3px;
         }
 
         header p {
             margin-top: 15px;
-            font-size: 1.1rem;
-            opacity: 0.85;
+            font-size: 1.2rem;
+            opacity: 0.9;
         }
 
         section {
-            padding: 60px 20px;
             max-width: 1000px;
             margin: auto;
+            padding: 80px 20px;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(6px);
             border-radius: 20px;
             padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-            transition: transform 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
+            margin-bottom: 40px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.4);
         }
 
         h2 {
-            margin-bottom: 15px;
-            font-weight: 600;
             color: #ffd369;
+            margin-bottom: 15px;
+        }
+
+        .image-box {
+            margin-top: 20px;
+        }
+
+        .image-box img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         ul {
@@ -76,9 +88,9 @@
 
         footer {
             text-align: center;
-            padding: 30px 20px;
+            padding: 30px;
+            background: #070a12;
             font-size: 0.9rem;
-            background: rgba(0,0,0,0.3);
             opacity: 0.8;
         }
     </style>
@@ -86,58 +98,45 @@
 <body>
 
     <header>
-        <h1>M7 World Championship</h1>
-        <p>Turnamen Dunia Mobile Legends: Bang Bang</p>
+        <div>
+            <h1>M7 World Championship</h1>
+            <p>Panggung Tertinggi Mobile Legends: Bang Bang</p>
+        </div>
     </header>
 
     <section>
         <div class="card">
             <h2>Apa itu M7 World Championship?</h2>
             <p>
-                M7 World Championship adalah turnamen tingkat dunia Mobile Legends: Bang Bang
-                yang mempertemukan tim-tim terbaik dari berbagai region di dunia.
-                Ajang ini menjadi puncak kompetisi MLBB dengan hadiah besar dan
-                pertandingan berintensitas tinggi.
+                M7 World Championship adalah turnamen esports global Mobile Legends:
+                Bang Bang yang mempertemukan tim terbaik dari berbagai negara.
             </p>
         </div>
 
         <div class="card">
-            <h2>Tujuan Turnamen</h2>
+            <h2>Atmosfer Pertandingan</h2>
+            <p>
+                M7 dikenal dengan panggung megah, cahaya futuristik,
+                serta atmosfer kompetisi yang intens.
+            </p>
+
+            <div class="image-box">
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e" alt="Esports Arena">
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Mengapa M7 Spesial?</h2>
             <ul>
-                <li>Menentukan tim Mobile Legends terbaik di dunia</li>
-                <li>Menampilkan strategi dan meta terbaru</li>
-                <li>Meningkatkan popularitas esports secara global</li>
+                <li>Turnamen MLBB paling bergengsi</li>
+                <li>Menampilkan meta dan strategi terbaik</li>
+                <li>Hadiah besar dan pengakuan dunia</li>
             </ul>
-        </div>
-
-        <div class="card">
-            <h2>Format Kompetisi</h2>
-            <p>
-                M7 World Championship biasanya terdiri dari beberapa tahap, seperti:
-            </p>
-            <ul>
-                <li>Group Stage</li>
-                <li>Knockout Stage</li>
-                <li>Grand Final</li>
-            </ul>
-            <p>
-                Setiap pertandingan menuntut kerja sama tim, strategi matang,
-                serta mekanik pemain yang tinggi.
-            </p>
-        </div>
-
-        <div class="card">
-            <h2>Mengapa M7 Begitu Bergengsi?</h2>
-            <p>
-                M7 bukan hanya soal hadiah, tetapi juga prestise. Tim yang berhasil
-                menjadi juara akan dikenang dalam sejarah Mobile Legends dan
-                mendapatkan pengakuan dunia.
-            </p>
         </div>
     </section>
 
     <footer>
-        © 2026 | Website Aesthetic M7 World Championship
+        © 2026 | Aesthetic M7 World Championship Website
     </footer>
 
 </body>
