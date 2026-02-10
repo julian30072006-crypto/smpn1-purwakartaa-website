@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>GEM UNO – Ultimate</title>
+<title>GEM UNO – Modern (Fixed)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
@@ -10,192 +10,210 @@
 <style>
 *{box-sizing:border-box;font-family:'Poppins',sans-serif}
 body{
-margin:0;min-height:100vh;
-background:radial-gradient(circle at top,#1b2735,#090a0f);
-display:flex;justify-content:center;align-items:center;color:white
+margin:0;
+min-height:100vh;
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+display:flex;justify-content:center;align-items:center;
+color:white
 }
 .game{
-width:95%;max-width:1200px;
+width:95%;max-width:1100px;
 background:rgba(255,255,255,.08);
 backdrop-filter:blur(14px);
-border-radius:28px;padding:30px;
-box-shadow:0 30px 80px rgba(0,0,0,.7)
+border-radius:28px;
+padding:30px;
+box-shadow:0 25px 70px rgba(0,0,0,.6)
 }
-.title{text-align:center;font-size:2.8rem;color:#ffd369;letter-spacing:3px}
-.layout{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-top:30px}
+h1{text-align:center;color:#ffd369}
+.layout{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:20px;
+margin-top:25px
+}
 .panel{
 background:rgba(255,255,255,.07);
-border-radius:22px;padding:20px;text-align:center
+border-radius:20px;
+padding:20px;
+text-align:center
 }
-.hand{display:flex;flex-wrap:wrap;justify-content:center}
+.hand{
+display:flex;
+flex-wrap:wrap;
+justify-content:center
+}
 .card{
-width:70px;height:105px;border-radius:18px;
-display:flex;align-items:center;justify-content:center;
-font-size:26px;font-weight:600;margin:6px;
-cursor:pointer;transition:.3s;
-box-shadow:0 10px 25px rgba(0,0,0,.5)
+width:70px;height:105px;
+border-radius:16px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:26px;
+font-weight:600;
+margin:6px;
+cursor:pointer;
+transition:.25s;
+box-shadow:0 10px 25px rgba(0,0,0,.4)
 }
-.card:hover{transform:translateY(-8px) scale(1.1)}
-.red{background:linear-gradient(135deg,#ff416c,#ff4b2b)}
-.blue{background:linear-gradient(135deg,#2193b0,#6dd5ed)}
-.green{background:linear-gradient(135deg,#56ab2f,#a8e063)}
-.yellow{background:linear-gradient(135deg,#f7971e,#ffd200);color:black}
-.black{background:#000}
+.card:hover{
+transform:translateY(-6px) scale(1.08)
+}
+.red{background:#e63946}
+.blue{background:#457b9d}
+.green{background:#2a9d8f}
+.yellow{background:#f4a261;color:black}
 .deck{
-margin-top:15px;padding:18px;border-radius:18px;
-background:linear-gradient(135deg,#232526,#414345);
+margin-top:15px;
+padding:18px;
+border-radius:18px;
+background:#222;
 cursor:pointer
 }
-.deck:hover{box-shadow:0 0 25px rgba(255,255,255,.4)}
-.info{text-align:center;margin-top:20px;min-height:24px}
-.colorPick{
-display:none;position:fixed;inset:0;
-background:rgba(0,0,0,.7);
-justify-content:center;align-items:center
+.deck:hover{
+box-shadow:0 0 20px rgba(255,255,255,.4)
 }
-.colorBox{
-background:#111;padding:30px;border-radius:20px
+.info{
+margin-top:15px;
+text-align:center;
+min-height:24px
 }
-.colorBtn{
-width:60px;height:60px;border-radius:50%;
-margin:10px;display:inline-block;cursor:pointer
+@media(max-width:900px){
+.layout{grid-template-columns:1fr}
 }
-@media(max-width:900px){.layout{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
 <div class="game">
-<div class="title">🎴 GEM UNO – ULTIMATE</div>
+<h1>🎴 GEM UNO</h1>
 
 <div class="layout">
-<div class="panel">
-<h3>🤖 BOT</h3>
-<p>Kartu: <span id="botCount"></span></p>
-</div>
+    <div class="panel">
+        <h3>🤖 BOT</h3>
+        <p>Kartu: <span id="botCount"></span></p>
+    </div>
 
-<div class="panel">
-<h3>Kartu Teratas</h3>
-<div id="topCard"></div>
-<div class="deck" onclick="draw()">Ambil Kartu</div>
-</div>
+    <div class="panel">
+        <h3>Kartu Teratas</h3>
+        <div id="topCard"></div>
+        <div class="deck" onclick="drawCard()">Ambil Kartu</div>
+    </div>
 
-<div class="panel">
-<h3>🧑 PLAYER</h3>
-<div id="playerCards" class="hand"></div>
-</div>
+    <div class="panel">
+        <h3>🧑 PLAYER</h3>
+        <div id="playerCards" class="hand"></div>
+    </div>
 </div>
 
 <div class="info" id="info"></div>
 </div>
 
-<!-- COLOR PICK -->
-<div class="colorPick" id="colorPick">
-<div class="colorBox">
-<div class="colorBtn red" onclick="choose('red')"></div>
-<div class="colorBtn blue" onclick="choose('blue')"></div>
-<div class="colorBtn green" onclick="choose('green')"></div>
-<div class="colorBtn yellow" onclick="choose('yellow')"></div>
-</div>
-</div>
-
 <script>
 const colors=["red","blue","green","yellow"];
-let deck=[],player=[],bot=[],top=null,turn="player",pending=null;
+let deck=[],player=[],bot=[],topCard=null,turn="player";
 
 function buildDeck(){
 deck=[];
 colors.forEach(c=>{
 for(let i=0;i<=9;i++){
-deck.push({c,v:i});deck.push({c,v:i});
+deck.push({c,v:i});
+deck.push({c,v:i});
 }
-["+2","skip","reverse"].forEach(s=>{
-deck.push({c,v:s});deck.push({c,v:s});
 });
-});
-for(let i=0;i<4;i++) deck.push({c:"black",v:"wild"},{c:"black",v:"+4"});
 }
 
-function shuffle(a){return a.sort(()=>Math.random()-0.5)}
+function shuffle(a){
+for(let i=a.length-1;i>0;i--){
+let j=Math.floor(Math.random()*(i+1));
+[a[i],a[j]]=[a[j],a[i]];
+}
+}
 
-function start(){
-buildDeck();shuffle(deck);
+function startGame(){
+buildDeck();
+shuffle(deck);
 player=deck.splice(0,7);
 bot=deck.splice(0,7);
-top=deck.pop();
-update();
+topCard=deck.pop();
+turn="player";
+updateUI();
 }
 
-function draw(){
-if(turn!=="player")return;
+function drawCard(){
+if(turn!=="player") return;
 player.push(deck.pop());
-turn="bot";update();setTimeout(botPlay,900);
+turn="bot";
+updateUI();
+setTimeout(botPlay,800);
 }
 
-function play(i){
+function playCard(i){
+if(turn!=="player") return;
 let c=player[i];
-if(c.c===top.c||c.v===top.v||c.c==="black"){
+if(c.c===topCard.c || c.v===topCard.v){
+topCard=c;
 player.splice(i,1);
-top=c;
-if(c.c==="black"){pending=c.v;pickColor()}
-else apply(c.v);
-turn="bot";update();check();
-if(turn==="bot")setTimeout(botPlay,900);
-}else msg("❌ Tidak cocok");
+turn="bot";
+updateUI();
+checkWin();
+setTimeout(botPlay,800);
+}else{
+showInfo("❌ Kartu tidak cocok");
 }
-
-function apply(v){
-if(v==="+2"){bot.push(deck.pop(),deck.pop())}
-if(v==="skip"){turn="player"}
 }
 
 function botPlay(){
+if(turn!=="bot") return;
 for(let i=0;i<bot.length;i++){
 let c=bot[i];
-if(c.c===top.c||c.v===top.v||c.c==="black"){
-bot.splice(i,1);top=c;
-if(c.c==="black")top.c=colors[Math.floor(Math.random()*4)];
-apply(c.v);update();check();return;
+if(c.c===topCard.c || c.v===topCard.v){
+topCard=c;
+bot.splice(i,1);
+turn="player";
+updateUI();
+checkWin();
+return;
 }
 }
-bot.push(deck.pop());turn="player";update();
-}
-
-function pickColor(){document.getElementById("colorPick").style.display="flex"}
-
-function choose(c){
-top.c=c;
-document.getElementById("colorPick").style.display="none";
-apply(pending);pending=null;
+bot.push(deck.pop());
+turn="player";
+updateUI();
 }
 
-function update(){
-let p=document.getElementById("playerCards");
+function updateUI(){
+const p=document.getElementById("playerCards");
 p.innerHTML="";
 player.forEach((x,i)=>{
 let d=document.createElement("div");
 d.className=`card ${x.c}`;
 d.textContent=x.v;
-d.onclick=()=>play(i);
+d.onclick=()=>playCard(i);
 p.appendChild(d);
 });
+
 document.getElementById("topCard").innerHTML=
-`<div class="card ${top.c}">${top.v}</div>`;
+`<div class="card ${topCard.c}">${topCard.v}</div>`;
 document.getElementById("botCount").textContent=bot.length;
 }
 
-function check(){
-if(player.length===1) msg("⚠️ UNO!");
-if(player.length===0){alert("🏆 KAMU MENANG!");start()}
-if(bot.length===0){alert("🤖 BOT MENANG!");start()}
+function checkWin(){
+if(player.length===0){
+alert("🎉 KAMU MENANG!");
+startGame();
+}
+if(bot.length===0){
+alert("🤖 BOT MENANG!");
+startGame();
+}
 }
 
-function msg(t){
-let i=document.getElementById("info");
-i.textContent=t;setTimeout(()=>i.textContent="",1500);
+function showInfo(t){
+const i=document.getElementById("info");
+i.textContent=t;
+setTimeout(()=>i.textContent="",1200);
 }
 
-start();
+startGame();
 </script>
 
 </body>
