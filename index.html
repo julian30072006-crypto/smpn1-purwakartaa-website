@@ -3,93 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMPN 1 Purwakarta - Informasi Sekolah</title>
+    <title>M7 World Championship</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
-        header { background-color: #007bff; color: white; text-align: center; padding: 20px; }
-        nav { background-color: #333; color: white; padding: 10px; text-align: center; }
-        nav a { color: white; margin: 0 15px; text-decoration: none; }
-        section { padding: 20px; max-width: 800px; margin: auto; background: white; margin-top: 20px; border-radius: 8px; }
-        footer { text-align: center; padding: 10px; background-color: #333; color: white; }
-        img { max-width: 100%; height: auto; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #ffffff;
+            line-height: 1.8;
+        }
+
+        header {
+            padding: 80px 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(6px);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            margin-top: 15px;
+            font-size: 1.1rem;
+            opacity: 0.85;
+        }
+
+        section {
+            padding: 60px 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: #ffd369;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 0.9rem;
+            background: rgba(0,0,0,0.3);
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body>
+
     <header>
-        <h1>SMP Negeri 1 Purwakarta</h1>
-        <p>Sekolah Berkualitas untuk Generasi Emas</p>
+        <h1>M7 World Championship</h1>
+        <p>Turnamen Dunia Mobile Legends: Bang Bang</p>
     </header>
-    
-    <nav>
-        <a href="#profil">Profil Sekolah</a>
-        <a href="#berita">Berita</a>
-        <a href="#galeri">Galeri</a>
-        <a href="#kontak">Kontak</a>
-        <a href="#Kicau">Kicau</a>
-    </nav>
-    
-    <section id="profil">
-        <h2>Profil Sekolah</h2>
-        <p>SMPN 1 Purwakarta adalah sekolah menengah pertama negeri yang berlokasi di Kabupaten Purwakarta dan dikenal sebagai salah satu sekolah favorit. Sekolah ini berkomitmen menyelenggarakan pendidikan yang berkualitas dengan menyeimbangkan penguasaan ilmu pengetahuan, pengembangan bakat dan minat, serta pembentukan karakter peserta didik. Didukung oleh tenaga pendidik yang profesional, kurikulum yang terus berkembang, serta sarana dan prasarana yang memadai, SMPN 1 Purwakarta mampu menciptakan lingkungan belajar yang aman, nyaman, dan kondusif. Sekolah ini juga aktif dalam berbagai kegiatan akademik dan nonakademik sehingga menghasilkan siswa-siswi yang berprestasi, berdisiplin, dan berakhlak mulia. Dengan semangat kebersamaan dan budaya sekolah yang positif, SMPN 1 Purwakarta terus berupaya melahirkan generasi unggul yang siap menghadapi tantangan masa depan serta berkontribusi bagi masyarakat.</p>
-        <ul>
-            <li>Kepala Sekolah: [Patoni M.Pd]</li>
-            <li>Jumlah Siswa: [99999]</li>
-            <li>Fasilitas: [Banyak]</li>
-        </ul>
-        <img src="assets/logo.png" alt="Logo SMPN 1 Purwakarta" style="display: block; margin: auto;">
-    </section>
-    
-    <section id="berita">
-        <h2>Berita Terbaru</h2>
-        <article>
-            <h3>[SMPN 1 Purwakarta Sebagai SMP Favorit Di Purwakarta]</h3>
-            <p>[MPN 1 Purwakarta merupakan salah satu sekolah menengah pertama negeri yang dikenal sebagai sekolah favorit di Kabupaten Purwakarta. Sekolah ini memiliki reputasi unggul dalam bidang akademik maupun nonakademik, dibuktikan dengan berbagai prestasi siswa di tingkat kabupaten hingga provinsi. Didukung oleh tenaga pendidik yang profesional, fasilitas pembelajaran yang memadai, serta lingkungan sekolah yang disiplin dan kondusif, SMPN 1 Purwakarta menjadi pilihan utama masyarakat. Selain menekankan prestasi, sekolah ini juga berkomitmen membentuk karakter siswa yang berakhlak, berbudaya, dan berdaya saing tinggi.]</p>
-        </article>
-        <article>
-            <h3>Melahirkan Talenta Berbakat Dari Generasi Ke Generasi</h3>
-            <p>[SMPN 1 Purwakarta terus melahirkan banyak talenta berbakat dari tahun ke tahun. Para siswa menunjukkan potensi dan prestasi di berbagai bidang, baik akademik maupun nonakademik, seperti sains, olahraga, seni, dan kepemimpinan. Melalui pembinaan yang konsisten, kegiatan ekstrakurikuler yang beragam, serta dukungan guru dan sekolah, bakat siswa dapat berkembang secara optimal. Hal ini menjadikan SMPN 1 Purwakarta sebagai wadah yang tepat untuk mencetak generasi muda yang berprestasi dan berkarakter.]</p>
-        </article>
-        <!-- Tambahkan lebih banyak artikel di sini -->
-    </section>
-    
-    <section id="galeri">
-        <h2>Galeri</h2>
-        <p>Foto-foto kegiatan sekolah:</p>
-        <img src="assets/foto1.jpg" alt="Foto Kegiatan 1">
-        <img src="assets/foto2.jpg" alt="Foto Kegiatan 2">
-        <!-- Tambahkan gambar lebih banyak -->
+
+    <section>
+        <div class="card">
+            <h2>Apa itu M7 World Championship?</h2>
+            <p>
+                M7 World Championship adalah turnamen tingkat dunia Mobile Legends: Bang Bang
+                yang mempertemukan tim-tim terbaik dari berbagai region di dunia.
+                Ajang ini menjadi puncak kompetisi MLBB dengan hadiah besar dan
+                pertandingan berintensitas tinggi.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>Tujuan Turnamen</h2>
+            <ul>
+                <li>Menentukan tim Mobile Legends terbaik di dunia</li>
+                <li>Menampilkan strategi dan meta terbaru</li>
+                <li>Meningkatkan popularitas esports secara global</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>Format Kompetisi</h2>
+            <p>
+                M7 World Championship biasanya terdiri dari beberapa tahap, seperti:
+            </p>
+            <ul>
+                <li>Group Stage</li>
+                <li>Knockout Stage</li>
+                <li>Grand Final</li>
+            </ul>
+            <p>
+                Setiap pertandingan menuntut kerja sama tim, strategi matang,
+                serta mekanik pemain yang tinggi.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>Mengapa M7 Begitu Bergengsi?</h2>
+            <p>
+                M7 bukan hanya soal hadiah, tetapi juga prestise. Tim yang berhasil
+                menjadi juara akan dikenang dalam sejarah Mobile Legends dan
+                mendapatkan pengakuan dunia.
+            </p>
+        </div>
     </section>
 
-    <section id="Kicau">
-        <h2>Kicau Mania</h2>
-        <p>Panglima Kicau:</p>
-        <img src="assets/caucau.jpg" alt="Kicaus1">
-        <img src="assets/caucau1.jpg" alt="Kicaus2">
-        <!-- Tambahkan gambar lebih banyak -->
-    </section>
-    
-    <section id="kontak">
-        <h2>Kontak Kami</h2>
-        <p>Alamat: [Jl. Kol. Kornel Singawinata No. 60, Kec. Purwakarta, Kab. Purwakarta, Prov. Jawa Barat]</p>
-        <p>Telepon: [#### - #### - ####]</p>
-        <p>Email: [bigy.juliansyah12@smp.belajar.id]</p>
-        <p>Website Resmi: [https://julian30072006-crypto.github.io/smpn1-purwakartaa-website/]</p>
-    </section>
-    
     <footer>
-        <p>&copy; 2023 SMPN 1 Purwakarta. Semua Hak Dilindungi.</p>
+        © 2026 | Website Aesthetic M7 World Championship
     </footer>
-    
-    <script>
-        // Script sederhana untuk smooth scroll (opsional)
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
+
 </body>
 </html>
