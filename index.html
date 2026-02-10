@@ -2,218 +2,253 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>GEM UNO – Modern (Fixed)</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
+<title>Gem UNO</title>
 <style>
-*{box-sizing:border-box;font-family:'Poppins',sans-serif}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
 body{
-margin:0;
-min-height:100vh;
-background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-display:flex;justify-content:center;align-items:center;
-color:white
+    background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
+    color:white;
+    min-height:100vh;
 }
+
+header{
+    text-align:center;
+    padding:30px;
+}
+
+header h1{
+    font-size:3em;
+    background:linear-gradient(90deg,#ff0080,#7928ca);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.menu{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    margin-top:40px;
+}
+
+button{
+    padding:15px 30px;
+    font-size:1.1em;
+    border:none;
+    border-radius:30px;
+    background:linear-gradient(90deg,#ff0080,#7928ca);
+    color:white;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.1);
+}
+
 .game{
-width:95%;max-width:1100px;
-background:rgba(255,255,255,.08);
-backdrop-filter:blur(14px);
-border-radius:28px;
-padding:30px;
-box-shadow:0 25px 70px rgba(0,0,0,.6)
+    display:none;
+    text-align:center;
+    padding:20px;
 }
-h1{text-align:center;color:#ffd369}
-.layout{
-display:grid;
-grid-template-columns:1fr 1fr 1fr;
-gap:20px;
-margin-top:25px
-}
-.panel{
-background:rgba(255,255,255,.07);
-border-radius:20px;
-padding:20px;
-text-align:center
-}
-.hand{
-display:flex;
-flex-wrap:wrap;
-justify-content:center
-}
+
+/* ================= UNO ================= */
 .card{
-width:70px;height:105px;
-border-radius:16px;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:26px;
-font-weight:600;
-margin:6px;
-cursor:pointer;
-transition:.25s;
-box-shadow:0 10px 25px rgba(0,0,0,.4)
+    display:inline-block;
+    width:80px;
+    height:120px;
+    border-radius:10px;
+    margin:10px;
+    line-height:120px;
+    font-size:2em;
+    font-weight:bold;
+    cursor:pointer;
 }
-.card:hover{
-transform:translateY(-6px) scale(1.08)
-}
-.red{background:#e63946}
-.blue{background:#457b9d}
-.green{background:#2a9d8f}
-.yellow{background:#f4a261;color:black}
-.deck{
-margin-top:15px;
-padding:18px;
-border-radius:18px;
-background:#222;
-cursor:pointer
-}
-.deck:hover{
-box-shadow:0 0 20px rgba(255,255,255,.4)
-}
-.info{
-margin-top:15px;
-text-align:center;
-min-height:24px
-}
-@media(max-width:900px){
-.layout{grid-template-columns:1fr}
+
+.red{background:#e74c3c;}
+.blue{background:#3498db;}
+.green{background:#2ecc71;}
+.yellow{background:#f1c40f;color:black;}
+
+/* ================= FLAPPY ================= */
+canvas{
+    background:#70c5ce;
+    display:block;
+    margin:auto;
+    border-radius:10px;
 }
 </style>
 </head>
 <body>
 
-<div class="game">
-<h1>🎴 GEM UNO</h1>
+<header>
+    <h1>🎮 GEM UNO</h1>
+    <p>Pilih Gem dan Mainkan</p>
+</header>
 
-<div class="layout">
-    <div class="panel">
-        <h3>🤖 BOT</h3>
-        <p>Kartu: <span id="botCount"></span></p>
-    </div>
-
-    <div class="panel">
-        <h3>Kartu Teratas</h3>
-        <div id="topCard"></div>
-        <div class="deck" onclick="drawCard()">Ambil Kartu</div>
-    </div>
-
-    <div class="panel">
-        <h3>🧑 PLAYER</h3>
-        <div id="playerCards" class="hand"></div>
-    </div>
+<div class="menu">
+    <button onclick="openGame('uno')">🎴 Gem UNO</button>
+    <button onclick="openGame('flappy')">🐦 Flappy Bird</button>
 </div>
 
-<div class="info" id="info"></div>
+<!-- ================= UNO GAME ================= -->
+<div id="uno" class="game">
+    <h2>Gem UNO</h2>
+    <p>Klik kartu sesuai warna / angka</p>
+
+    <div id="enemy">Musuh: <span id="enemyCount">5</span> kartu</div>
+    <h3>Kartu Tengah:</h3>
+    <div id="center"></div>
+
+    <h3>Kartu Kamu:</h3>
+    <div id="player"></div>
+
+    <br>
+    <button onclick="drawCard()">Ambil Kartu</button>
+</div>
+
+<!-- ================= FLAPPY GAME ================= -->
+<div id="flappy" class="game">
+    <h2>Gem Flappy Bird</h2>
+    <p>Klik atau tekan SPASI</p>
+    <canvas id="canvas" width="320" height="480"></canvas>
 </div>
 
 <script>
+/* ========== MENU ========== */
+function openGame(id){
+    document.querySelectorAll('.game').forEach(g=>g.style.display='none');
+    document.getElementById(id).style.display='block';
+}
+
+/* ========== UNO GAME ========== */
 const colors=["red","blue","green","yellow"];
-let deck=[],player=[],bot=[],topCard=null,turn="player";
+let playerCards=[];
+let enemyCards=5;
+let centerCard={};
 
-function buildDeck(){
-deck=[];
-colors.forEach(c=>{
-for(let i=0;i<=9;i++){
-deck.push({c,v:i});
-deck.push({c,v:i});
-}
-});
-}
-
-function shuffle(a){
-for(let i=a.length-1;i>0;i--){
-let j=Math.floor(Math.random()*(i+1));
-[a[i],a[j]]=[a[j],a[i]];
-}
+function randomCard(){
+    return{
+        color:colors[Math.floor(Math.random()*4)],
+        value:Math.floor(Math.random()*9)
+    };
 }
 
-function startGame(){
-buildDeck();
-shuffle(deck);
-player=deck.splice(0,7);
-bot=deck.splice(0,7);
-topCard=deck.pop();
-turn="player";
-updateUI();
+function startUNO(){
+    playerCards=[];
+    enemyCards=5;
+    for(let i=0;i<5;i++) playerCards.push(randomCard());
+    centerCard=randomCard();
+    renderUNO();
 }
 
-function drawCard(){
-if(turn!=="player") return;
-player.push(deck.pop());
-turn="bot";
-updateUI();
-setTimeout(botPlay,800);
+function renderUNO(){
+    document.getElementById("enemyCount").innerText=enemyCards;
+
+    const center=document.getElementById("center");
+    center.innerHTML="";
+    const c=document.createElement("div");
+    c.className=`card ${centerCard.color}`;
+    c.innerText=centerCard.value;
+    center.appendChild(c);
+
+    const player=document.getElementById("player");
+    player.innerHTML="";
+    playerCards.forEach((card,i)=>{
+        const el=document.createElement("div");
+        el.className=`card ${card.color}`;
+        el.innerText=card.value;
+        el.onclick=()=>playCard(i);
+        player.appendChild(el);
+    });
 }
 
 function playCard(i){
-if(turn!=="player") return;
-let c=player[i];
-if(c.c===topCard.c || c.v===topCard.v){
-topCard=c;
-player.splice(i,1);
-turn="bot";
-updateUI();
-checkWin();
-setTimeout(botPlay,800);
-}else{
-showInfo("❌ Kartu tidak cocok");
-}
-}
-
-function botPlay(){
-if(turn!=="bot") return;
-for(let i=0;i<bot.length;i++){
-let c=bot[i];
-if(c.c===topCard.c || c.v===topCard.v){
-topCard=c;
-bot.splice(i,1);
-turn="player";
-updateUI();
-checkWin();
-return;
-}
-}
-bot.push(deck.pop());
-turn="player";
-updateUI();
+    const card=playerCards[i];
+    if(card.color===centerCard.color || card.value===centerCard.value){
+        centerCard=card;
+        playerCards.splice(i,1);
+        enemyCards--;
+        if(enemyCards<=0){
+            alert("KAMU MENANG 🎉");
+            startUNO();
+            return;
+        }
+    }
+    renderUNO();
 }
 
-function updateUI(){
-const p=document.getElementById("playerCards");
-p.innerHTML="";
-player.forEach((x,i)=>{
-let d=document.createElement("div");
-d.className=`card ${x.c}`;
-d.textContent=x.v;
-d.onclick=()=>playCard(i);
-p.appendChild(d);
+function drawCard(){
+    playerCards.push(randomCard());
+    renderUNO();
+}
+
+startUNO();
+
+/* ========== FLAPPY BIRD ========== */
+const canvas=document.getElementById("canvas");
+const ctx=canvas.getContext("2d");
+
+let birdY=200,gravity=1.5,velocity=0;
+let pipes=[];
+let frame=0;
+
+function resetFlappy(){
+    birdY=200;
+    velocity=0;
+    pipes=[];
+    frame=0;
+}
+
+function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    velocity+=gravity;
+    birdY+=velocity;
+
+    ctx.fillStyle="yellow";
+    ctx.beginPath();
+    ctx.arc(80,birdY,12,0,Math.PI*2);
+    ctx.fill();
+
+    if(frame%90===0){
+        const gap=120;
+        const top=Math.random()*200+20;
+        pipes.push({x:320,top:top,bottom:top+gap});
+    }
+
+    pipes.forEach(p=>{
+        p.x-=2;
+        ctx.fillStyle="green";
+        ctx.fillRect(p.x,0,40,p.top);
+        ctx.fillRect(p.x,p.bottom,40,480);
+
+        if(80>p.x && 80<p.x+40 && (birdY<p.top || birdY>p.bottom)){
+            alert("GAME OVER");
+            resetFlappy();
+        }
+    });
+
+    if(birdY>480 || birdY<0){
+        alert("GAME OVER");
+        resetFlappy();
+    }
+
+    frame++;
+    requestAnimationFrame(draw);
+}
+
+document.addEventListener("keydown",e=>{
+    if(e.code==="Space") velocity=-8;
 });
+canvas.addEventListener("click",()=>velocity=-8);
 
-document.getElementById("topCard").innerHTML=
-`<div class="card ${topCard.c}">${topCard.v}</div>`;
-document.getElementById("botCount").textContent=bot.length;
-}
-
-function checkWin(){
-if(player.length===0){
-alert("🎉 KAMU MENANG!");
-startGame();
-}
-if(bot.length===0){
-alert("🤖 BOT MENANG!");
-startGame();
-}
-}
-
-function showInfo(t){
-const i=document.getElementById("info");
-i.textContent=t;
-setTimeout(()=>i.textContent="",1200);
-}
-
-startGame();
+draw();
 </script>
 
 </body>
