@@ -2,158 +2,202 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
+<title>Gem UNO Game</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alter Ego MLBB Line Up</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
-
 body{
-    background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
-    color:#fff;
-    overflow-x:hidden;
-}
-
-/* HEADER */
-header{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:linear-gradient(135deg,#1a1a2e,#16213e);
+    color:white;
     text-align:center;
-    padding:100px 20px;
 }
 
-header h1{
-    font-size:3.5rem;
-    letter-spacing:4px;
-    color:#c77dff;
-    text-shadow:0 0 20px rgba(199,125,255,.6);
+h1{
+    margin-top:20px;
+    color:#f9c74f;
 }
 
-header p{
-    margin-top:15px;
-    opacity:.85;
-    font-size:1.1rem;
-}
-
-/* SECTION */
-section{
-    max-width:1100px;
+.game{
+    max-width:900px;
     margin:auto;
-    padding:60px 20px;
+    padding:20px;
 }
 
-/* GRID PLAYER */
-.lineup{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:40px;
+.card{
+    width:60px;
+    height:90px;
+    border-radius:10px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    font-weight:bold;
+    margin:6px;
+    cursor:pointer;
+    color:white;
+    box-shadow:0 4px 10px rgba(0,0,0,.5);
 }
 
-/* PLAYER CARD */
-.player{
-    background:rgba(255,255,255,.06);
-    backdrop-filter:blur(8px);
-    border-radius:20px;
-    padding:25px;
-    text-align:center;
-    box-shadow:0 15px 40px rgba(0,0,0,.5);
-    transition:.5s ease;
+.red{background:#e63946;}
+.blue{background:#457b9d;}
+.green{background:#2a9d8f;}
+.yellow{background:#f4a261;color:black;}
+
+.deck{
+    margin:20px;
+    padding:15px;
+    border:2px dashed #fff;
+    display:inline-block;
+    cursor:pointer;
 }
 
-.player:hover{
-    transform:translateY(-12px) scale(1.05);
-    box-shadow:0 0 30px rgba(199,125,255,.5);
+.bot, .player{
+    margin-top:20px;
 }
 
-/* IMAGE */
-.player img{
-    width:140px;
-    height:140px;
-    object-fit:cover;
-    border-radius:50%;
-    border:4px solid #c77dff;
-    margin-bottom:15px;
-    transition:.5s;
+.bot .card{
+    background:#444;
+    cursor:default;
 }
 
-.player:hover img{
-    transform:scale(1.1);
-    box-shadow:0 0 20px rgba(199,125,255,.8);
-}
-
-/* TEXT */
-.player h3{
-    font-size:1.3rem;
-    margin-bottom:5px;
-    color:#e0aaff;
-}
-
-.player span{
-    font-size:.9rem;
-    opacity:.8;
-}
-
-/* FOOTER */
-footer{
-    text-align:center;
-    padding:30px;
-    font-size:.9rem;
-    background:rgba(0,0,0,.3);
-    margin-top:60px;
+.info{
+    margin-top:15px;
+    font-size:18px;
 }
 </style>
 </head>
 <body>
 
-<header>
-    <h1>ALTER EGO MLBB</h1>
-    <p>Official Line Up Mobile Legends: Bang Bang</p>
-</header>
+<h1>🎴 GEM UNO GAME</h1>
 
-<section>
-    <div class="lineup">
+<div class="game">
 
-        <div class="player">
-            <img src="img/celiboy.jpg" alt="Celiboy">
-            <h3>Celiboy</h3>
-            <span>Gold Lane</span>
-        </div>
-
-        <div class="player">
-            <img src="img/pai.jpg" alt="Pai">
-            <h3>Pai</h3>
-            <span>Roamer</span>
-        </div>
-
-        <div class="player">
-            <img src="img/lemon.jpg" alt="Lemon">
-            <h3>Lemon</h3>
-            <span>EXP Lane</span>
-        </div>
-
-        <div class="player">
-            <img src="img/rasy.jpg" alt="Rasy">
-            <h3>Rasy</h3>
-            <span>Mid Lane</span>
-        </div>
-
-        <div class="player">
-            <img src="img/dreams.jpg" alt="Dreams">
-            <h3>Dreams</h3>
-            <span>Jungler</span>
-        </div>
-
+    <div class="bot">
+        <h3>Bot Cards: <span id="botCount"></span></h3>
     </div>
-</section>
 
-<footer>
-    © 2026 | Alter Ego MLBB – Aesthetic Line Up
-</footer>
+    <h3>Top Card</h3>
+    <div id="topCard"></div>
+
+    <div class="deck" onclick="drawCard()">
+        Draw Card
+    </div>
+
+    <div class="player">
+        <h3>Your Cards</h3>
+        <div id="playerCards"></div>
+    </div>
+
+    <div class="info" id="info"></div>
+
+</div>
+
+<script>
+const colors = ["red","blue","green","yellow"];
+let deck = [];
+let player = [];
+let bot = [];
+let topCard = null;
+let turn = "player";
+
+function createDeck(){
+    deck = [];
+    colors.forEach(c=>{
+        for(let i=0;i<=9;i++){
+            deck.push({color:c, value:i});
+            deck.push({color:c, value:i});
+        }
+    });
+}
+
+function shuffle(arr){
+    return arr.sort(()=>Math.random()-0.5);
+}
+
+function startGame(){
+    createDeck();
+    shuffle(deck);
+    player = deck.splice(0,7);
+    bot = deck.splice(0,7);
+    topCard = deck.pop();
+    updateUI();
+}
+
+function drawCard(){
+    if(turn !== "player") return;
+    player.push(deck.pop());
+    turn = "bot";
+    updateUI();
+    setTimeout(botPlay,1000);
+}
+
+function playCard(index){
+    const card = player[index];
+    if(card.color === topCard.color || card.value === topCard.value){
+        topCard = card;
+        player.splice(index,1);
+        turn = "bot";
+        updateUI();
+        checkWin();
+        setTimeout(botPlay,1000);
+    }else{
+        info("Kartu tidak cocok!");
+    }
+}
+
+function botPlay(){
+    let played = false;
+    for(let i=0;i<bot.length;i++){
+        if(bot[i].color === topCard.color || bot[i].value === topCard.value){
+            topCard = bot[i];
+            bot.splice(i,1);
+            played = true;
+            break;
+        }
+    }
+    if(!played) bot.push(deck.pop());
+    turn = "player";
+    updateUI();
+    checkWin();
+}
+
+function updateUI(){
+    const playerDiv = document.getElementById("playerCards");
+    playerDiv.innerHTML="";
+    player.forEach((c,i)=>{
+        const div=document.createElement("div");
+        div.className=`card ${c.color}`;
+        div.innerText=c.value;
+        div.onclick=()=>playCard(i);
+        playerDiv.appendChild(div);
+    });
+
+    document.getElementById("topCard").innerHTML=
+        `<div class="card ${topCard.color}">${topCard.value}</div>`;
+
+    document.getElementById("botCount").innerText=bot.length;
+}
+
+function checkWin(){
+    if(player.length===0){
+        alert("🎉 KAMU MENANG!");
+        startGame();
+    }
+    if(bot.length===0){
+        alert("😢 BOT MENANG!");
+        startGame();
+    }
+}
+
+function info(msg){
+    document.getElementById("info").innerText=msg;
+    setTimeout(()=>document.getElementById("info").innerText="",1500);
+}
+
+startGame();
+</script>
 
 </body>
 </html>
