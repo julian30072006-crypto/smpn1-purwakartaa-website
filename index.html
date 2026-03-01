@@ -2,254 +2,100 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Gem UNO</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern Aesthetic Website</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-body{
-    background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
-    color:white;
-    min-height:100vh;
+body {
+    height: 100vh;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    overflow: hidden;
 }
 
-header{
-    text-align:center;
-    padding:30px;
+.container {
+    width: 90%;
+    max-width: 1000px;
+    padding: 40px;
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(0,0,0,0.3);
+    text-align: center;
 }
 
-header h1{
-    font-size:3em;
-    background:linear-gradient(90deg,#ff0080,#7928ca);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #00f5ff, #ff00c8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.menu{
-    display:flex;
-    justify-content:center;
-    gap:30px;
-    margin-top:40px;
+p {
+    margin-top: 20px;
+    font-size: 1.1rem;
+    opacity: 0.9;
 }
 
-button{
-    padding:15px 30px;
-    font-size:1.1em;
-    border:none;
-    border-radius:30px;
-    background:linear-gradient(90deg,#ff0080,#7928ca);
-    color:white;
-    cursor:pointer;
-    transition:.3s;
+.button {
+    margin-top: 30px;
+    padding: 12px 30px;
+    border-radius: 30px;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: white;
+    background: linear-gradient(90deg, #00f5ff, #ff00c8);
+    transition: 0.3s ease;
 }
 
-button:hover{
-    transform:scale(1.1);
+.button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #00f5ff;
 }
 
-.game{
-    display:none;
-    text-align:center;
-    padding:20px;
+footer {
+    margin-top: 40px;
+    font-size: 0.9rem;
+    opacity: 0.7;
 }
 
-/* ================= UNO ================= */
-.card{
-    display:inline-block;
-    width:80px;
-    height:120px;
-    border-radius:10px;
-    margin:10px;
-    line-height:120px;
-    font-size:2em;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.red{background:#e74c3c;}
-.blue{background:#3498db;}
-.green{background:#2ecc71;}
-.yellow{background:#f1c40f;color:black;}
-
-/* ================= FLAPPY ================= */
-canvas{
-    background:#70c5ce;
-    display:block;
-    margin:auto;
-    border-radius:10px;
+@media(max-width:768px){
+    h1 {
+        font-size: 2rem;
+    }
 }
 </style>
 </head>
+
 <body>
 
-<header>
-    <h1>🎮 GEM UNO</h1>
-    <p>Pilih Gem dan Mainkan</p>
-</header>
+<div class="container">
+    <h1>Modern Aesthetic</h1>
+    <p>Website dengan tampilan modern, clean, dan elegan.<br>
+    Dibuat dengan gaya glassmorphism dan gradient masa kini.</p>
 
-<div class="menu">
-    <button onclick="openGame('uno')">🎴 Gem UNO</button>
-    <button onclick="openGame('flappy')">🐦 Flappy Bird</button>
+    <button class="button">Explore</button>
+
+    <footer>
+        ✨ Creator Julian ✨
+    </footer>
 </div>
-
-<!-- ================= UNO GAME ================= -->
-<div id="uno" class="game">
-    <h2>Gem UNO</h2>
-    <p>Klik kartu sesuai warna / angka</p>
-
-    <div id="enemy">Musuh: <span id="enemyCount">5</span> kartu</div>
-    <h3>Kartu Tengah:</h3>
-    <div id="center"></div>
-
-    <h3>Kartu Kamu:</h3>
-    <div id="player"></div>
-
-    <br>
-    <button onclick="drawCard()">Ambil Kartu</button>
-</div>
-
-<!-- ================= FLAPPY GAME ================= -->
-<div id="flappy" class="game">
-    <h2>Gem Flappy Bird</h2>
-    <p>Klik atau tekan SPASI</p>
-    <canvas id="canvas" width="320" height="480"></canvas>
-</div>
-
-<script>
-/* ========== MENU ========== */
-function openGame(id){
-    document.querySelectorAll('.game').forEach(g=>g.style.display='none');
-    document.getElementById(id).style.display='block';
-}
-
-/* ========== UNO GAME ========== */
-const colors=["red","blue","green","yellow"];
-let playerCards=[];
-let enemyCards=5;
-let centerCard={};
-
-function randomCard(){
-    return{
-        color:colors[Math.floor(Math.random()*4)],
-        value:Math.floor(Math.random()*9)
-    };
-}
-
-function startUNO(){
-    playerCards=[];
-    enemyCards=5;
-    for(let i=0;i<5;i++) playerCards.push(randomCard());
-    centerCard=randomCard();
-    renderUNO();
-}
-
-function renderUNO(){
-    document.getElementById("enemyCount").innerText=enemyCards;
-
-    const center=document.getElementById("center");
-    center.innerHTML="";
-    const c=document.createElement("div");
-    c.className=`card ${centerCard.color}`;
-    c.innerText=centerCard.value;
-    center.appendChild(c);
-
-    const player=document.getElementById("player");
-    player.innerHTML="";
-    playerCards.forEach((card,i)=>{
-        const el=document.createElement("div");
-        el.className=`card ${card.color}`;
-        el.innerText=card.value;
-        el.onclick=()=>playCard(i);
-        player.appendChild(el);
-    });
-}
-
-function playCard(i){
-    const card=playerCards[i];
-    if(card.color===centerCard.color || card.value===centerCard.value){
-        centerCard=card;
-        playerCards.splice(i,1);
-        enemyCards--;
-        if(enemyCards<=0){
-            alert("KAMU MENANG 🎉");
-            startUNO();
-            return;
-        }
-    }
-    renderUNO();
-}
-
-function drawCard(){
-    playerCards.push(randomCard());
-    renderUNO();
-}
-
-startUNO();
-
-/* ========== FLAPPY BIRD ========== */
-const canvas=document.getElementById("canvas");
-const ctx=canvas.getContext("2d");
-
-let birdY=200,gravity=1.5,velocity=0;
-let pipes=[];
-let frame=0;
-
-function resetFlappy(){
-    birdY=200;
-    velocity=0;
-    pipes=[];
-    frame=0;
-}
-
-function draw(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-
-    velocity+=gravity;
-    birdY+=velocity;
-
-    ctx.fillStyle="yellow";
-    ctx.beginPath();
-    ctx.arc(80,birdY,12,0,Math.PI*2);
-    ctx.fill();
-
-    if(frame%90===0){
-        const gap=120;
-        const top=Math.random()*200+20;
-        pipes.push({x:320,top:top,bottom:top+gap});
-    }
-
-    pipes.forEach(p=>{
-        p.x-=2;
-        ctx.fillStyle="green";
-        ctx.fillRect(p.x,0,40,p.top);
-        ctx.fillRect(p.x,p.bottom,40,480);
-
-        if(80>p.x && 80<p.x+40 && (birdY<p.top || birdY>p.bottom)){
-            alert("GAME OVER");
-            resetFlappy();
-        }
-    });
-
-    if(birdY>480 || birdY<0){
-        alert("GAME OVER");
-        resetFlappy();
-    }
-
-    frame++;
-    requestAnimationFrame(draw);
-}
-
-document.addEventListener("keydown",e=>{
-    if(e.code==="Space") velocity=-8;
-});
-canvas.addEventListener("click",()=>velocity=-8);
-
-draw();
-</script>
 
 </body>
 </html>
