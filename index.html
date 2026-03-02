@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Modern Aesthetic Website</title>
+<title>Mekatronika Modern</title>
 
-<!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -17,85 +16,170 @@
 }
 
 body {
-    height: 100vh;
     background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    min-height: 100vh;
     color: white;
-    overflow: hidden;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+}
+
+nav h2 {
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+}
+
+nav ul li {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+nav ul li:hover {
+    color: #00f5ff;
 }
 
 .container {
-    width: 90%;
-    max-width: 1000px;
-    padding: 40px;
-    border-radius: 20px;
-    backdrop-filter: blur(15px);
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 40px rgba(0,0,0,0.3);
+    padding: 50px;
     text-align: center;
 }
 
 h1 {
     font-size: 3rem;
-    font-weight: 700;
     background: linear-gradient(90deg, #00f5ff, #ff00c8);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-p {
-    margin-top: 20px;
-    font-size: 1.1rem;
-    opacity: 0.9;
+.menu-buttons {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
-.button {
-    margin-top: 30px;
-    padding: 12px 30px;
+.menu-buttons button {
+    padding: 12px 25px;
     border-radius: 30px;
     border: none;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    color: white;
     background: linear-gradient(90deg, #00f5ff, #ff00c8);
-    transition: 0.3s ease;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
 }
 
-.button:hover {
+.menu-buttons button:hover {
     transform: scale(1.1);
-    box-shadow: 0 0 20px #00f5ff;
+}
+
+.content-box {
+    margin-top: 40px;
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 30px rgba(0,0,0,0.3);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    display: none;
+    animation: fade 0.5s ease;
+}
+
+@keyframes fade {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
 }
 
 footer {
-    margin-top: 40px;
-    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 60px;
+    padding: 20px;
     opacity: 0.7;
 }
 
 @media(max-width:768px){
-    h1 {
-        font-size: 2rem;
-    }
+    h1 { font-size: 2rem; }
+    nav { padding: 20px; }
 }
 </style>
 </head>
 
 <body>
 
+<nav>
+    <h2>Mekatronika</h2>
+    <ul>
+        <li>Home</li>
+        <li>Materi</li>
+        <li>Teknologi</li>
+    </ul>
+</nav>
+
 <div class="container">
-    <h1>Modern Aesthetic</h1>
-    <p>Website dengan tampilan modern, clean, dan elegan.<br>
-    Dibuat dengan gaya glassmorphism dan gradient masa kini.</p>
+    <h1>Dunia Mekatronika</h1>
+    <p>Gabungan Mekanika, Elektronika, dan Pemrograman dalam satu sistem cerdas.</p>
 
-    <button class="button">Explore</button>
+    <div class="menu-buttons">
+        <button onclick="showContent('pengertian')">Pengertian</button>
+        <button onclick="showContent('komponen')">Komponen</button>
+        <button onclick="showContent('contoh')">Contoh Penerapan</button>
+        <button onclick="showContent('karir')">Peluang Karir</button>
+    </div>
 
-    <footer>
-        ✨ Creator Julian ✨
-    </footer>
+    <div id="pengertian" class="content-box">
+        <h2>Pengertian Mekatronika</h2>
+        <p>Mekatronika adalah bidang teknik yang menggabungkan sistem mekanik, elektronika, dan kontrol berbasis komputer untuk menciptakan sistem otomatis dan cerdas.</p>
+    </div>
+
+    <div id="komponen" class="content-box">
+        <h2>Komponen Utama</h2>
+        <p>• Sensor (mendeteksi kondisi)<br>
+           • Aktuator (menggerakkan sistem)<br>
+           • Mikrokontroler (otak sistem)<br>
+           • Sistem kontrol & software</p>
+    </div>
+
+    <div id="contoh" class="content-box">
+        <h2>Contoh Penerapan</h2>
+        <p>• Robot industri<br>
+           • Mesin CNC<br>
+           • Sistem parkir otomatis<br>
+           • Drone dan kendaraan listrik</p>
+    </div>
+
+    <div id="karir" class="content-box">
+        <h2>Peluang Karir</h2>
+        <p>• Robotics Engineer<br>
+           • Automation Engineer<br>
+           • Embedded System Developer<br>
+           • Teknisi Industri 4.0</p>
+    </div>
 </div>
+
+<footer>
+    ✨ Creator Julian ✨
+</footer>
+
+<script>
+function showContent(id) {
+    let boxes = document.querySelectorAll('.content-box');
+    boxes.forEach(box => box.style.display = "none");
+    document.getElementById(id).style.display = "block";
+}
+</script>
 
 </body>
 </html>
